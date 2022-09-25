@@ -1,5 +1,7 @@
 #!/bin/bash
+echo "Upgrading"
 
+echo "Configure apt"
 sed -i 's/us.archive/old-releases/g' /etc/apt/sources.list
 sed -i 's/security/old-releases/g' /etc/apt/sources.list
 sed -i 's/precise-old-releases/precise/g' /etc/apt/sources.list
@@ -22,5 +24,8 @@ yes | do-release-upgrade
 yes | apt-get -q -y upgrade
 apt-get autoremove -y
 apt-get clean -y
+
+echo "trusty32" > /etc/hostname
+sed -i 's/precise/trusty/g' /etc/hosts
 
 echo "Upgraded successfully"
